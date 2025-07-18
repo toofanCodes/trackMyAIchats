@@ -1,5 +1,7 @@
 # 🚀 LLM Chat Navigator: Never Lose Your Questions Again!
 
+![Visitor Count](https://visitor-badge.glitch.me/badge?page_id=toofanmacpro.trackMyChat)
+
 Tired of endlessly scrolling through your LLM chat history to find that one crucial question? This simple browser extension solves that nuisance! A dumb solution to irritating problem!
 
 **LLM Chat Navigator** provides a persistent, draggable sidebar that automatically bookmarks your questions in ChatGPT and Gemini. Jump directly to any point in your conversation with a single click!

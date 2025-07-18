@@ -12,10 +12,10 @@ Tired of endlessly scrolling through your LLM chat history to find that one cruc
 
 1.  **Download:** Clone this repository to your local machine.
 2.  **Install:**
-    *   Open your Chromium-based browser (Chrome, Edge, Brave, etc.).
-    *   Go to `chrome://extensions`.
-    *   Enable "Developer mode" (usually a toggle in the top right).
-    *   Click "Load unpacked" and select the cloned repository folder.
+    *   🌐 Open your Chromium-based browser (Chrome, Edge, Brave, etc.).
+    *   ⚙️ Go to `chrome://extensions`.
+    *   👨‍💻 Enable "Developer mode" (usually a toggle in the top right).
+    *   📁 Click "Load unpacked" and select the cloned repository folder.
 3.  **Go!** Visit `chat.openai.com` or `gemini.google.com` and see the sidebar appear!
 
 ---

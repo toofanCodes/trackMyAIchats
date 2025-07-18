@@ -20,6 +20,8 @@ Tired of endlessly scrolling through your LLM chat history to find that one cruc
 
 As an avid user of large language models, I constantly found myself frustrated by the lack of easy navigation within chat interfaces. This extension is my personal solution to that persistent nuisance, and I'm open-sourcing it for fellow enthusiasts who might find it useful.
 
+*Disclaimer: This is "vibe-code" developed with the assistance of Cursor, and in some cases, Gemini CLI. Transparency is key!*
+
 ## 🛠️ Features
 
 *   **Automatic Question Bookmarking:** Automatically detects and bookmarks your questions as you type them.
@@ -42,4 +44,4 @@ I'll review PRs as time permits.
 
 ## 📄 License
 
-This project is open-source. Please add your preferred license here (e.g., MIT, Apache 2.0).
+This project is open-source under the MIT License.

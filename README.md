@@ -1,6 +1,6 @@
 # 🚀 LLM Chat Navigator: Never Lose Your Questions Again!
 
-![Visitor Count](https://visitor-badge.glitch.me/badge?page_id=toofanmacpro.trackMyChat)
+![Visitor Count](https://komarev.com/ghpvc/?username=toofanmacpro&repo=trackMyChat)
 
 Tired of endlessly scrolling through your LLM chat history to find that one crucial question? This simple browser extension solves that nuisance! A dumb solution to irritating problem!
 

@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Old files
+*_old.js
+*_old.json

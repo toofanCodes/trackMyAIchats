@@ -74,6 +74,29 @@ console.log('[LLM Bookmark] Content script loaded');
   injectSidebar();
   console.log('[LLM Bookmark] Sidebar injected (should be visible as iframe)');
 
+  // Helper to generate a unique selector for an element
+  function getUniqueSelector(el) {
+    if (!el) return '';
+    if (el.id) return `#${el.id}`;
+    let path = [];
+    while (el && el.nodeType === 1 && el !== document.body) {
+      let selector = el.nodeName.toLowerCase();
+      if (el.className) {
+        const classes = el.className.split(' ').filter(Boolean).join('.');
+        if (classes) selector += '.' + classes;
+      }
+      let sibling = el;
+      let nth = 1;
+      while ((sibling = sibling.previousElementSibling)) {
+        if (sibling.nodeName === el.nodeName) nth++;
+      }
+      selector += `:nth-of-type(${nth})`;
+      path.unshift(selector);
+      el = el.parentElement;
+    }
+    return path.length ? path.join(' > ') : '';
+  }
+
   // --- DOM Scanning for Questions ---
   function scanQuestionsFromDOM() {
     const hostname = window.location.hostname;
@@ -81,11 +104,11 @@ console.log('[LLM Bookmark] Content script loaded');
     if (hostname.includes('gemini.google.com')) {
       // Gemini: user queries in <user-query> elements
       const userQueries = document.querySelectorAll('user-query');
-      questions = Array.from(userQueries).map((el, idx) => {
+      questions = Array.from(userQueries).map((el) => {
         const lines = Array.from(el.querySelectorAll('.query-text-line')).map(line => line.textContent.trim());
         return {
           snippet: lines.join('\n').slice(0, 100),
-          selector: `user-query:nth-of-type(${idx + 1})`,
+          selector: getUniqueSelector(el),
           timestamp: '',
           type: 'question'
         };
@@ -93,9 +116,18 @@ console.log('[LLM Bookmark] Content script loaded');
     } else if (hostname.includes('claude.ai')) {
       // Claude: try to find user messages (customize as needed)
       const userMsgs = document.querySelectorAll('.user-message');
-      questions = Array.from(userMsgs).map((el, idx) => ({
+      questions = Array.from(userMsgs).map((el) => ({
         snippet: el.innerText.slice(0, 100),
-        selector: `.user-message:nth-of-type(${idx + 1})`,
+        selector: getUniqueSelector(el),
+        timestamp: '',
+        type: 'question'
+      }));
+    } else if (hostname.includes('chat.openai.com')) {
+      // ChatGPT: user messages
+      const userMsgs = document.querySelectorAll('[data-testid="user-message"]');
+      questions = Array.from(userMsgs).map((el) => ({
+        snippet: el.innerText.slice(0, 100),
+        selector: getUniqueSelector(el),
         timestamp: '',
         type: 'question'
       }));
@@ -119,6 +151,21 @@ console.log('[LLM Bookmark] Content script loaded');
     } else if (event.data && event.data.type === 'closeLLMSidebar') {
       const iframe = document.getElementById('llm-bookmark-sidebar');
       if (iframe) iframe.remove();
+    } else if (event.data && event.data.type === 'scrollToBookmark') {
+      // Scroll to the element matching the selector
+      try {
+        const el = document.querySelector(event.data.selector);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Optionally, highlight the element
+          el.style.transition = 'background 0.5s';
+          const prevBg = el.style.background;
+          el.style.background = '#fff7b2';
+          setTimeout(() => { el.style.background = prevBg; }, 1200);
+        }
+      } catch (e) {
+        console.warn('Failed to scroll to bookmark:', e);
+      }
     }
   });
 
@@ -133,4 +180,27 @@ console.log('[LLM Bookmark] Content script loaded');
 
   // --- Optionally, send questions on load ---
   setTimeout(sendQuestionsToSidebar, 1000);
+
+  // Helper: Run a callback when the URL changes (SPA navigation)
+  function onUrlChange(callback) {
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+      const url = location.href;
+      if (url !== lastUrl) {
+        lastUrl = url;
+        callback();
+      }
+    }).observe(document, {subtree: true, childList: true});
+    window.addEventListener('popstate', () => {
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        callback();
+      }
+    });
+  }
+
+  // Automatically refresh sidebar when URL changes (SPA navigation)
+  onUrlChange(() => {
+    setTimeout(sendQuestionsToSidebar, 500); // Give the new chat time to render
+  });
 })(); 

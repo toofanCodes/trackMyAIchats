@@ -3,9 +3,13 @@ const toggle = document.getElementById('toggleSidebar');
 const showSidebarBtn = document.getElementById('showSidebarBtn');
 
 // Load current state
-chrome.storage.local.get(['sidebarEnabled'], (result) => {
-  toggle.checked = result.sidebarEnabled !== false; // default to enabled
-});
+if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+  chrome.storage.local.get(['sidebarEnabled'], (result) => {
+    toggle.checked = result.sidebarEnabled !== false; // default to enabled
+  });
+} else {
+  console.warn('chrome.storage.local is not available. Are you running this as a standalone file?');
+}
 
 toggle.addEventListener('change', () => {
   chrome.storage.local.set({ sidebarEnabled: toggle.checked });

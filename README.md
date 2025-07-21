@@ -30,8 +30,9 @@ As an avid user of large language models, I constantly found myself frustrated b
 
 *   **Automatic Question Bookmarking:** Automatically detects and bookmarks your questions as you type them.
 *   **Persistent Sidebar:** A draggable and resizable sidebar that stays with you across chat sessions.
-*   **One-Click Navigation:** Click a bookmark to instantly scroll to that point in the conversation.
-*   **Platform Support:** Supports ChatGPT and Gemini.
+*   **One-Click Navigation & Highlighting:** Click a bookmark to instantly scroll to that point in the conversation and temporarily highlight it.
+*   **Platform Support:** Supports ChatGPT, Gemini, and Claude.
+*   **SPA Navigation:** Automatically refreshes when you navigate between chats.
 *   🥚 **Easter Egg for Future Explorers:** Psst... take a peek at `treeLogic.js` if you're dreaming of a more organized, hierarchical bookmark future! ✨
 
 ## 🤝 Contributing
@@ -48,4 +49,8 @@ I'll review PRs as time permits.
 
 ## 📄 License
 
-This project is open-source under the MIT License.
+This project is open-source under the [MIT License](LICENSE).
+
+## 🔒 Privacy Policy
+
+This extension operates entirely on your local machine. No data is collected, stored, or transmitted. For more details, see the [Privacy Policy](docs/privacy-policy.html).

@@ -23,18 +23,28 @@ console.log('[LLM Bookmark] Content script loaded');
     // --- Draggable Handle for Sidebar ---
     const dragHandle = document.createElement('div');
     dragHandle.style.position = 'fixed';
-    dragHandle.style.top = '70px';
-    dragHandle.style.right = '105px';
-    dragHandle.style.width = '160px';
-    dragHandle.style.height = '40px';
-    dragHandle.style.background = 'rgba(0,0,0,0)';
-    dragHandle.style.cursor = 'move';
+    dragHandle.style.width = '60px';
+    dragHandle.style.height = '18px';
+    dragHandle.style.background = 'rgba(25, 118, 210, 0.18)';
+    dragHandle.style.cursor = 'grab';
     dragHandle.style.zIndex = '1000000';
-    dragHandle.style.borderTopLeftRadius = '8px';
-    dragHandle.style.borderTopRightRadius = '8px';
+    dragHandle.style.borderRadius = '8px 8px 0 0';
     dragHandle.style.userSelect = 'none';
-    dragHandle.innerText = '';
+    dragHandle.style.display = 'flex';
+    dragHandle.style.alignItems = 'center';
+    dragHandle.style.justifyContent = 'center';
+    dragHandle.style.boxShadow = '0 2px 8px rgba(25, 118, 210, 0.10)';
+    dragHandle.innerHTML = '<span style="font-size:1.2em;opacity:0.7;">&#x2630;</span>';
+    dragHandle.style.pointerEvents = 'auto'; // Always clickable
     document.body.appendChild(dragHandle);
+
+    // Initial position: above sidebar
+    function positionDragHandle() {
+      const sidebarRect = iframe.getBoundingClientRect();
+      dragHandle.style.left = `${sidebarRect.left + (sidebarRect.width/2) - 30}px`;
+      dragHandle.style.top = `${sidebarRect.top - 8}px`;
+    }
+    positionDragHandle();
 
     let isDragging = false, startX, startY, startLeft, startTop;
     dragHandle.addEventListener('mousedown', (e) => {
@@ -61,8 +71,9 @@ console.log('[LLM Bookmark] Content script loaded');
       iframe.style.top = newTop + 'px';
       iframe.style.right = 'auto';
       iframe.style.bottom = 'auto';
-      dragHandle.style.left = newLeft + 'px';
-      dragHandle.style.top = newTop + 'px';
+      // Move handle with sidebar
+      dragHandle.style.left = `${newLeft + (iframe.offsetWidth/2) - 30}px`;
+      dragHandle.style.top = `${newTop - 8}px`;
     });
     document.addEventListener('mouseup', () => {
       if (!isDragging) return;
@@ -199,8 +210,44 @@ console.log('[LLM Bookmark] Content script loaded');
     });
   }
 
+  // Observe chat container for lazy loading (scroll up)
+  function observeChatContainer() {
+    let chatSelector = null;
+    if (window.location.hostname.includes('chat.openai.com')) {
+      chatSelector = '[data-testid="conversation-turn"]'; // ChatGPT conversation turns
+    } else if (window.location.hostname.includes('gemini.google.com')) {
+      chatSelector = 'main'; // Gemini main container (adjust if needed)
+    } else if (window.location.hostname.includes('claude.ai')) {
+      chatSelector = '.chat-history'; // Claude chat history (adjust if needed)
+    }
+    if (!chatSelector) return;
+
+    // Try to find the chat container
+    const chatContainer = document.querySelector(chatSelector)?.parentElement || document.querySelector(chatSelector);
+    if (!chatContainer) return;
+
+    let debounceTimeout = null;
+    const observer = new MutationObserver(() => {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {
+        sendQuestionsToSidebar();
+      }, 300); // Debounce to avoid rapid firing
+    });
+
+    observer.observe(chatContainer, { childList: true, subtree: true });
+  }
+
   // Automatically refresh sidebar when URL changes (SPA navigation)
   onUrlChange(() => {
     setTimeout(sendQuestionsToSidebar, 500); // Give the new chat time to render
+  });
+
+  // Call observer after sidebar injection and on SPA navigation
+  observeChatContainer();
+  onUrlChange(() => {
+    setTimeout(() => {
+      sendQuestionsToSidebar();
+      observeChatContainer(); // Re-attach observer in case chat container changed
+    }, 500); // Give the new chat time to render
   });
 })(); 

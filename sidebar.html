@@ -8,11 +8,12 @@
 <body>
   <div id="sidebar-root">
     <div id="sidebar-header">
-      <div style="width:160px">CHAT NAVIGATION</div>
       <button class="refresh-btn" title="Refresh bookmarks" style="margin-left:30px">&#x21bb;</button>
+      <button class="star-btn" title="Enable star (pin) mode" style="margin-left:20px">&#9733;</button>
       <button class="close-btn" title="Close sidebar" style="margin-left:20px">&times;</button>
     </div>
     <div id="sidebar-content">
+      <input type="text" id="search-bar" placeholder="Search questions..." style="box-sizing:border-box;display:block;width:100%;max-width:100%;margin-bottom:12px;padding:8px 12px;border-radius:8px;border:1px solid #b3c6e0;font-size:1em;outline:none;">
       <ul id="bookmark-list"></ul>
     </div>
   </div>

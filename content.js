@@ -80,6 +80,36 @@ console.log('[LLM Bookmark] Content script loaded');
       isDragging = false;
       document.body.style.userSelect = '';
     });
+
+    // Tooltip for drag handle
+    function showDragTooltip(e) {
+      let tooltip = document.getElementById('sidebar-drag-tooltip');
+      if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'sidebar-drag-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = '#222';
+        tooltip.style.color = '#fff';
+        tooltip.style.padding = '4px 10px';
+        tooltip.style.borderRadius = '6px';
+        tooltip.style.fontSize = '0.95em';
+        tooltip.style.zIndex = '1000001';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.boxShadow = '0 2px 8px rgba(25, 118, 210, 0.10)';
+        document.body.appendChild(tooltip);
+      }
+      tooltip.textContent = 'Hold to drag';
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX + 12) + 'px';
+      tooltip.style.top = (e.clientY + 12) + 'px';
+    }
+    function hideDragTooltip() {
+      const tooltip = document.getElementById('sidebar-drag-tooltip');
+      if (tooltip) tooltip.style.display = 'none';
+    }
+    dragHandle.addEventListener('mouseenter', showDragTooltip);
+    dragHandle.addEventListener('mousemove', showDragTooltip);
+    dragHandle.addEventListener('mouseleave', hideDragTooltip);
   }
 
   injectSidebar();

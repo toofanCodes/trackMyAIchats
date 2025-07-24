@@ -161,11 +161,50 @@ function requestQuestionsFromParent() {
 requestQuestionsFromParent();
 
 // --- Refresh and Close Button Logic ---
+// Tooltip logic for header buttons
+function showTooltip(target, text) {
+  let tooltip = document.getElementById('sidebar-tooltip');
+  if (!tooltip) {
+    tooltip = document.createElement('div');
+    tooltip.id = 'sidebar-tooltip';
+    tooltip.style.position = 'fixed';
+    tooltip.style.background = '#222';
+    tooltip.style.color = '#fff';
+    tooltip.style.padding = '4px 10px';
+    tooltip.style.borderRadius = '6px';
+    tooltip.style.fontSize = '0.95em';
+    tooltip.style.zIndex = '1000001';
+    tooltip.style.pointerEvents = 'none';
+    tooltip.style.boxShadow = '0 2px 8px rgba(25, 118, 210, 0.10)';
+    document.body.appendChild(tooltip);
+  }
+  tooltip.textContent = text;
+  tooltip.style.display = 'block';
+}
+function moveTooltip(e) {
+  const tooltip = document.getElementById('sidebar-tooltip');
+  if (tooltip) {
+    tooltip.style.left = (e.clientX + 12) + 'px';
+    tooltip.style.top = (e.clientY + 12) + 'px';
+  }
+}
+function hideTooltip() {
+  const tooltip = document.getElementById('sidebar-tooltip');
+  if (tooltip) tooltip.style.display = 'none';
+}
+
+function addHeaderTooltip(btn, text) {
+  btn.addEventListener('mouseenter', (e) => { showTooltip(btn, text); moveTooltip(e); });
+  btn.addEventListener('mousemove', moveTooltip);
+  btn.addEventListener('mouseleave', hideTooltip);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // Refresh button: request fresh questions from parent
   const refreshBtn = document.querySelector('.refresh-btn');
   if (refreshBtn) {
     refreshBtn.addEventListener('click', requestQuestionsFromParent);
+    addHeaderTooltip(refreshBtn, 'Refresh');
   }
   // Close button: ask parent to remove the sidebar iframe
   const closeBtn = document.querySelector('.close-btn');
@@ -179,5 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (sidebar) sidebar.style.display = 'none';
       }
     });
+    addHeaderTooltip(closeBtn, 'Close window');
   }
 });

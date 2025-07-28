@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LLM Sidebar Toggle</title>
+  <title>AI Breadcrumbs</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 16px; }
-    label { display: flex; align-items: center; gap: 8px; }
-    input[type="checkbox"] { width: 18px; height: 18px; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 16px; width: 200px; text-align: center; }
+    button { width: 100%; padding: 10px; font-size: 1em; margin-bottom: 12px; cursor: pointer; }
+    a { color: #1976d2; text-decoration: none; font-size: 0.9em; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <button id="showSidebarBtn" style="margin-top: 12px;">Show Sidebar</button>
+  <h2>AI Breadcrumbs</h2>
+  <button id="showSidebarBtn">Show Sidebar</button>
+  <a href="#" id="howToUseLink">How to use this extension</a>
   <script src="popup.js"></script>
 </body>
 </html> 

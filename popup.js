@@ -1,5 +1,6 @@
 // popup.js
 const showSidebarBtn = document.getElementById('showSidebarBtn');
+const howToUseLink = document.getElementById('howToUseLink');
 
 // Show Sidebar button logic
 if (showSidebarBtn) {
@@ -10,4 +11,12 @@ if (showSidebarBtn) {
       }
     });
   });
-} 
+}
+
+// "How to use" link logic
+if (howToUseLink) {
+  howToUseLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    chrome.tabs.create({ url: chrome.runtime.getURL('docs/guide.html') });
+  });
+}

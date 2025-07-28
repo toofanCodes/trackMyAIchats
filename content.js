@@ -1,6 +1,6 @@
 // content.js - Clean, focused version for sidebar injection and communication only
 
-console.log('[LLM Bookmark] Content script loaded');
+console.log('[AI Breadcrumbs] Content script loaded');
 
 (function() {
   // --- Sidebar Injection ---
@@ -22,6 +22,7 @@ console.log('[LLM Bookmark] Content script loaded');
 
     // --- Draggable Handle for Sidebar ---
     const dragHandle = document.createElement('div');
+    dragHandle.id = 'llm-bookmark-drag-handle'; // Give the handle an ID for easy removal
     dragHandle.style.position = 'fixed';
     dragHandle.style.width = '60px';
     dragHandle.style.height = '18px';
@@ -113,7 +114,7 @@ console.log('[LLM Bookmark] Content script loaded');
   }
 
   injectSidebar();
-  console.log('[LLM Bookmark] Sidebar injected (should be visible as iframe)');
+  console.log('[AI Breadcrumbs] Sidebar injected (should be visible as iframe)');
 
   // Helper to generate a unique selector for an element
   function getUniqueSelector(el) {
@@ -190,8 +191,13 @@ console.log('[LLM Bookmark] Content script loaded');
     if (event.data && event.data.type === 'requestQuestionsFromDOM') {
       sendQuestionsToSidebar();
     } else if (event.data && event.data.type === 'closeLLMSidebar') {
+      // Remove all sidebar-related elements to prevent lingering UI
       const iframe = document.getElementById('llm-bookmark-sidebar');
+      const handle = document.getElementById('llm-bookmark-drag-handle');
+      const tooltip = document.getElementById('sidebar-drag-tooltip');
       if (iframe) iframe.remove();
+      if (handle) handle.remove();
+      if (tooltip) tooltip.remove();
     } else if (event.data && event.data.type === 'scrollToBookmark') {
       // Scroll to the element matching the selector
       try {

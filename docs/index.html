@@ -49,13 +49,8 @@
     <ul>
       <li><strong>No Personal Data Collection:</strong> This extension does not collect, transmit, or share any personal data.</li>
       <li><strong>Local Data Storage Only:</strong> All data processing, including the storage of bookmarks and user settings, is performed locally within your browser. The extension does not send any data to external servers or third parties.</li>
-      <li><strong>Use of Chrome Storage API:</strong> The extension utilizes Chrome’s <code>storage.local</code> API to store user-created bookmarks and preferences (such as sidebar visibility, position, or appearance settings). If Chrome’s <code>storage.sync</code> is used, data is only synced across your own Chrome browsers via Google’s infrastructure and is not accessible to the extension developer.</li>
-      <li><strong>Types of Data Stored:</strong>
-        <ul>
-          <li>Bookmarks you create for chat questions.</li>
-          <li>Sidebar preferences (e.g., whether the sidebar is enabled or disabled, its position, or appearance settings).</li>
-        </ul>
-      </li>
+      <li><strong>Use of Browser Storage:</strong> The extension utilizes the browser's <code>localStorage</code> API to save your "pinned" questions. This allows your pinned items to persist even after you close the browser tab.</li>
+      <li><strong>No External Syncing:</strong> This data is stored only on your local device and is not synced across your different computers.</li>
       <li><strong>No External Communication:</strong> The extension does not communicate with any external servers, APIs, or third-party services.</li>
     </ul>
     <h2>User Control</h2>

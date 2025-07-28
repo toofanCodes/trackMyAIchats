@@ -1,10 +1,10 @@
-# 🚀 LLM Chat Navigator: Never Lose Your Questions Again!
+# 🚀 AI Breadcrumbs: Never lose your way in a sea of prompts!
 
 ![Visitor Count](https://komarev.com/ghpvc/?username=toofanmacpro&repo=trackMyChat)
 
-Tired of endlessly scrolling through your LLM chat history to find that one crucial question? This simple browser extension solves that nuisance! A dumb solution to irritating problem!
+Never lose your way in a sea of prompts, leave a crumb, find your answer! This extension adds a smart sidebar to your favorite AI chats, letting you bookmark questions and navigate long conversations with ease.
 
-**LLM Chat Navigator** provides a persistent, draggable sidebar that automatically bookmarks your questions in ChatGPT and Gemini. Jump directly to any point in your conversation with a single click!
+**AI Breadcrumbs** provides a persistent, draggable sidebar that automatically bookmarks your questions in ChatGPT, Gemini, and Claude. Jump directly to any point in your conversation with a single click!
 
 ---
 
@@ -55,4 +55,4 @@ This project is open-source under the [MIT License](LICENSE).
 
 ## 🔒 Privacy Policy
 
-This extension operates entirely on your local machine. No data is collected, stored, or transmitted. For more details, see the [Privacy Policy](docs/privacy-policy.html).
+This extension operates entirely on your local machine. No data is collected, stored, or transmitted. For more details, see the [Privacy Policy](docs/index.html).

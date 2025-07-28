@@ -5,10 +5,10 @@ const bookmarkList = document.getElementById('bookmark-list');
 const starBtn = document.querySelector('.star-btn');
 
 let currentQuestions = [];
-let pinnedQuestions = JSON.parse(localStorage.getItem('llmPinnedQuestions') || '[]'); // [{selector, label, snippet, timestamp}]
+let pinnedQuestions = JSON.parse(localStorage.getItem('aiBreadcrumbsPinnedQuestions') || '[]'); // [{selector, label, snippet, timestamp}]
 
 function savePinned() {
-  localStorage.setItem('llmPinnedQuestions', JSON.stringify(pinnedQuestions));
+  localStorage.setItem('aiBreadcrumbsPinnedQuestions', JSON.stringify(pinnedQuestions));
 }
 
 function isPinned(selector) {
@@ -148,7 +148,7 @@ if (starBtn) {
     if (starBtn.classList.contains('active')) {
       starBtn.title = 'Click a question to star it (max 3). Click again to exit star mode.';
     } else {
-      starBtn.title = 'Enable star (pin) mode';
+      starBtn.title = 'Drop a crumb, pin your questions now';
     }
   });
 }

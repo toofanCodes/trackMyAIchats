@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "LLM Chat Question Bookmark Sidebar",
+  "name": "AI Breadcrumbs",
   "version": "1.0",
-  "description": "Bookmark and navigate your questions in ChatGPT, Gemini, and Claude with a persistent sidebar.",
+  "description": "Never lose your way in a sea of prompts, leave a crumb, find your answer!",
   "host_permissions": [
     "https://chat.openai.com/*",
     "https://gemini.google.com/*",
@@ -36,7 +36,7 @@
     }
   ],
   "action": {
-    "default_title": "Navigate your AI chat",
+    "default_title": "AI Breadcrumbs",
     "default_popup": "popup.html"
   },
   "icons": {

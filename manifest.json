@@ -3,7 +3,6 @@
   "name": "LLM Chat Question Bookmark Sidebar",
   "version": "1.0",
   "description": "Bookmark and navigate your questions in ChatGPT, Gemini, and Claude with a persistent sidebar.",
-  "permissions": ["scripting"],
   "host_permissions": [
     "https://chat.openai.com/*",
     "https://gemini.google.com/*",

@@ -31,7 +31,7 @@
     }
   ],
   "action": {
-    "default_title": "Show Question Bookmarks",
+    "default_title": "Navigate your AI chat",
     "default_popup": "popup.html"
   },
   "icons": {

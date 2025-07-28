@@ -31,6 +31,8 @@ As an avid user of large language models, I constantly found myself frustrated b
 *   **Automatic Question Bookmarking:** Automatically detects and bookmarks your questions as you type them.
 *   **Persistent Sidebar:** A draggable and resizable sidebar that stays with you across chat sessions.
 *   **One-Click Navigation & Highlighting:** Click a bookmark to instantly scroll to that point in the conversation and temporarily highlight it.
+*   **Pin Important Questions:** Star up to three key questions to keep them pinned to the top of your bookmark list for easy access.
+*   **Search & Filter:** Quickly find specific questions with a built-in search bar.
 *   **Platform Support:** Supports ChatGPT, Gemini, and Claude.
 *   **SPA Navigation:** Automatically refreshes when you navigate between chats.
 *   🥚 **Easter Egg for Future Explorers:** Psst... take a peek at `treeLogic.js` if you're dreaming of a more organized, hierarchical bookmark future! ✨

@@ -9,9 +9,6 @@
     "https://claude.ai/*",
     "https://chatgpt.com/*"
   ],
-  "permissions": [
-    "storage"
-  ],
   "background": {
     "service_worker": "background.js"
   },

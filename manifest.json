@@ -9,6 +9,9 @@
     "https://claude.ai/*",
     "https://chatgpt.com/*"
   ],
+  "permissions": [
+    "storage"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -27,7 +30,12 @@
   "web_accessible_resources": [
     {
       "resources": ["sidebar.html", "sidebar.js", "sidebar.css"],
-      "matches": ["<all_urls>"]
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://gemini.google.com/*",
+        "https://claude.ai/*",
+        "https://chatgpt.com/*"
+      ]
     }
   ],
   "action": {
